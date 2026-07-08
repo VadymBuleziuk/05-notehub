@@ -19,7 +19,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [modal, setModal] = useState(false);
-  const [perPage, setPerPage] = useState(12);
+  const perPage = 12;
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setQuery(value);
     setPage(1);
