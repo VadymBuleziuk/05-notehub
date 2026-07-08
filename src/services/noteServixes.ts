@@ -11,6 +11,7 @@ const BASE_URL = "https://notehub-public.goit.study/api/notes";
 export const fetchNotes = async (
   search: string,
   page: number,
+  perPage: number,
 ): Promise<NoteResponse> => {
   const token = import.meta.env.VITE_NOTEHUB_TOKEN;
 
@@ -18,6 +19,7 @@ export const fetchNotes = async (
     params: {
       search,
       page,
+      perPage,
     },
     headers: {
       Authorization: `Bearer ${token}`,
