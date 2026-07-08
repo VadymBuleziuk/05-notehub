@@ -7,7 +7,7 @@ import {
   deleteNote,
   fetchNotes,
   type NoteResponse,
-} from "../../services/noteServixes";
+} from "../../services/noteServices";
 import Pagination from "../Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import SearchBox from "../SearchBox/SearchBox";
