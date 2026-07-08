@@ -5,6 +5,7 @@ import type { Note, NoteTag } from "../../types/note";
 
 interface NoteFormProps {
   submitForm: (noteData: NoteTag) => Promise<Note>;
+  closeForm: () => void;
 }
 
 const validationSchema = Yup.object({
@@ -20,7 +21,7 @@ const validationSchema = Yup.object({
     .required("Tag is required"),
 });
 
-export default function NoteForm({ submitForm }: NoteFormProps) {
+export default function NoteForm({ submitForm, closeForm }: NoteFormProps) {
   return (
     <Formik
       initialValues={{
@@ -29,7 +30,10 @@ export default function NoteForm({ submitForm }: NoteFormProps) {
         tag: "Todo",
       }}
       validationSchema={validationSchema}
-      onSubmit={submitForm}
+      onSubmit={async (values, { resetForm }) => {
+        await submitForm(values);
+        resetForm();
+      }}
     >
       {({ isValid }) => (
         <Form className={css.form}>
@@ -68,7 +72,11 @@ export default function NoteForm({ submitForm }: NoteFormProps) {
           </div>
 
           <div className={css.actions}>
-            <button type="button" className={css.cancelButton}>
+            <button
+              type="button"
+              className={css.cancelButton}
+              onClick={closeForm}
+            >
               Cancel
             </button>
 

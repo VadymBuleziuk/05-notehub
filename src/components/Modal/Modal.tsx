@@ -38,7 +38,7 @@ export default function Modal({ onClose, onSubmit }: ModalProps) {
       aria-modal="true"
     >
       <div className={css.modal}>
-        <NoteForm submitForm={onSubmit} />
+        <NoteForm submitForm={onSubmit} closeForm={onClose} />
       </div>
     </div>,
     document.body,

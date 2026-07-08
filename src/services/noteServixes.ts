@@ -7,22 +7,29 @@ export interface NoteResponse {
 }
 
 const BASE_URL = "https://notehub-public.goit.study/api/notes";
-const token = import.meta.env.VITE_NOTEHUB_TOKEN;
 
 export const fetchNotes = async (
-  query: string,
+  search: string,
   page: number,
 ): Promise<NoteResponse> => {
+  const token = import.meta.env.VITE_NOTEHUB_TOKEN;
+
   const response = await axios.get<NoteResponse>(BASE_URL, {
-    params: { query, page },
+    params: {
+      search,
+      page,
+    },
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
   return response.data;
 };
 
 export const createNote = async (noteData: NoteTag): Promise<Note> => {
+  const token = import.meta.env.VITE_NOTEHUB_TOKEN;
+  console.log("TOKEN:", token);
   const response = await axios.post<Note>(BASE_URL, noteData, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -33,11 +40,11 @@ export const createNote = async (noteData: NoteTag): Promise<Note> => {
   return response.data;
 };
 
-export const deleteNote = async (idNote: string): Promise<Note> => {
-  const response = await axios.delete<Note>(`${BASE_URL}/${idNote}`, {
+export const deleteNote = async (idNote: string): Promise<void> => {
+  const token = import.meta.env.VITE_NOTEHUB_TOKEN;
+  await axios.delete<Note>(`${BASE_URL}/${idNote}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
 };
