@@ -7,8 +7,10 @@ export interface Note {
   tag: string;
 }
 
-export interface NoteTag {
+export type Tag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
+
+export interface NewNote {
   title: string;
-  content: string;
-  tag: string;
+  content?: string;
+  tag: Tag;
 }

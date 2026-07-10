@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note, NoteTag } from "../types/note";
+import type { Note, NewNote } from "../types/note";
 
 export interface NoteResponse {
   notes: Note[];
@@ -29,7 +29,7 @@ export const fetchNotes = async (
   return response.data;
 };
 
-export const createNote = async (noteData: NoteTag): Promise<Note> => {
+export const createNote = async (noteData: NewNote): Promise<Note> => {
   const token = import.meta.env.VITE_NOTEHUB_TOKEN;
   console.log("TOKEN:", token);
   const response = await axios.post<Note>(BASE_URL, noteData, {
@@ -42,11 +42,12 @@ export const createNote = async (noteData: NoteTag): Promise<Note> => {
   return response.data;
 };
 
-export const deleteNote = async (idNote: string): Promise<void> => {
+export const deleteNote = async (idNote: string): Promise<Note> => {
   const token = import.meta.env.VITE_NOTEHUB_TOKEN;
-  await axios.delete<Note>(`${BASE_URL}/${idNote}`, {
+  const response = await axios.delete<Note>(`${BASE_URL}/${idNote}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+  return response.data;
 };

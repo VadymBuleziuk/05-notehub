@@ -3,7 +3,6 @@ import css from "./App.module.css";
 import NoteList from "../NoteList/NoteLIst";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
-  createNote,
   deleteNote,
   fetchNotes,
   type NoteResponse,
@@ -14,6 +13,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import { useDebouncedCallback } from "use-debounce";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
+import NoteForm from "../NoteForm/NoteForm";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -57,7 +57,11 @@ function App() {
           </button>
         </header>
         {isSuccess && <NoteList notes={data.notes} deleteNote={deleteNote} />}
-        {modal && <Modal onClose={closeModal} onSubmit={createNote} />}
+        {modal && (
+          <Modal onClose={closeModal}>
+            <NoteForm closeForm={closeModal} />
+          </Modal>
+        )}
       </div>
     </>
   );

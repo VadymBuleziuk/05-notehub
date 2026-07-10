@@ -2,7 +2,7 @@ import css from "./NoteList.module.css";
 import type { Note } from "../../types/note";
 interface NoteListProps {
   notes: Note[];
-  deleteNote: (idNote: string) => Promise<void>;
+  deleteNote: (idNote: string) => Promise<Note>;
 }
 
 export default function NoteList({ notes, deleteNote }: NoteListProps) {
