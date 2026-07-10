@@ -2,11 +2,7 @@ import { useState } from "react";
 import css from "./App.module.css";
 import NoteList from "../NoteList/NoteLIst";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import {
-  deleteNote,
-  fetchNotes,
-  type NoteResponse,
-} from "../../services/noteService";
+import { fetchNotes, type NoteResponse } from "../../services/noteService";
 import Pagination from "../Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import SearchBox from "../SearchBox/SearchBox";
@@ -56,7 +52,7 @@ function App() {
             Create note +
           </button>
         </header>
-        {isSuccess && <NoteList notes={data.notes} deleteNote={deleteNote} />}
+        {isSuccess && <NoteList notes={data.notes} />}
         {modal && (
           <Modal onClose={closeModal}>
             <NoteForm closeForm={closeModal} />
