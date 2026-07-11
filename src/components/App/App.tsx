@@ -20,7 +20,7 @@ function App() {
     setQuery(value);
     setPage(1);
   }, 500);
-
+  console.log(2);
   const openModal = () => {
     setModal(true);
   };
