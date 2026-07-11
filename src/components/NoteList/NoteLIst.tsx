@@ -9,7 +9,6 @@ interface NoteListProps {
 
 export default function NoteList({ notes }: NoteListProps) {
   const queryClient = useQueryClient();
-  console.log(1);
   const mutation = useMutation({
     mutationFn: deleteNote,
     onSuccess() {
